@@ -1,21 +1,24 @@
 const express = require('express');
-
-const mongoose = require('mongoose');
+const logger = require('morgan');
 const cors = require('cors');
-const dotenv = require('dotenv');
 
-dotenv.config();
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.send('API is running');
+const app = express();
+
+app.use(cors());
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+app.use('/', (req, res)=>{
+    res.send('Connected to GA Pet Adoption Server')
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-}); 
+app.listen(PORT, ()=>{
+    console.log(`Running Express GA Pet Adoption server on Port ${PORT} . . .`)
+});
+
