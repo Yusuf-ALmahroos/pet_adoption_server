@@ -1,3 +1,7 @@
-package-lock.json
-/node_modules
+*.log
+*.env
+node_modules/
 .env
+.cache/
+.local/
+.vscode-server/
