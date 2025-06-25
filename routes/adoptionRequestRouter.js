@@ -1,14 +1,6 @@
-import express from 'express';
-import AdoptionRequest from '../models/AdoptionRequest.js';
-import Pet from '../models/Pet.js';
-import { protect, authorize } from '../middleware/auth.js';
-import { validateAdoptionRequest } from '../middleware/validation.js';
 
 const router = express.Router();
 
-// @desc    Create adoption request
-// @route   POST /api/adoption-requests
-// @access  Private (Adopter only)
 router.post('/', protect, authorize('adopter'), validateAdoptionRequest, async (req, res) => {
   try {
     const { petId, message, adopterInfo } = req.body;
