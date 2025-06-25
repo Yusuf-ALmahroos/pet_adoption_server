@@ -1,56 +1,55 @@
-import express from 'express';
-import User from '../models/User.js';
-import { protect, authorize } from '../middleware/auth.js';
+// userrouter.js
+const express = require('express');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const userSchema = require('./models/user');
 
+const User = mongoose.model('User', userSchema);
 const router = express.Router();
 
-
-router.get('/shelters', async (req, res) => {
+// Register a new user
+router.post('/register', async (req, res) => {
   try {
-    const shelters = await User.find({ role: 'shelter' })
-      .select('name email phone address profileImage createdAt')
-      .sort('name');
+    const { name, email, password } = req.body;
 
-    res.json({
-      success: true,
-      count: shelters.length,
-      shelters
-    });
-  } catch (error) {
-    console.error('Get shelters error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Server error fetching shelters'
-    });
-  }
-});
-
-
-router.get('/shelters/:id', async (req, res) => {
-  try {
-    const shelter = await User.findOne({ 
-      _id: req.params.id, 
-      role: 'shelter' 
-    }).select('name email phone address profileImage createdAt');
-
-    if (!shelter) {
-      return res.status(404).json({
-        success: false,
-        message: 'Shelter not found'
-      });
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'User already exists' });
     }
 
-    res.json({
-      success: true,
-      shelter
-    });
-  } catch (error) {
-    console.error('Get shelter error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Server error fetching shelter'
-    });
+    // Hash the password
+    const passwordDigest = await bcrypt.hash(password, 10);
+
+    // Create new user
+    const newUser = new User({ name, email, passwordDigest });
+    await newUser.save();
+
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-export default router;
+// Login route
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.passwordDigest);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    res.status(200).json({ message: 'Login successful', user: { id: user._id, name: user.name, email: user.email } });
+  } catch (err) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+module.exports = router;
