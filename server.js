@@ -2,7 +2,8 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 
-const AuthRouter = require('./routes/AuthRouter')
+const AuthRouter = require('./routes/AuthRouter');
+const CommentRouter = require('./routes/CommentRouter');
 
 
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use('/auth', AuthRouter);
+app.use('/comments', CommentRouter);
 
 app.use('/', (req, res)=>{
     res.send('Connected to GA Pet Adoption Server')
