@@ -33,8 +33,58 @@ const GetPetComment = async (req, res) => {
    }
 };
 
+const UpdateComment =async (req,res) => {
+   try {
+      const userId = res.locals.payload;
+      const {commentId} = req.params;
+      const {content} = req.body;
+
+      const comment = await Comment.findById(commentId);
+     
+      if(!comment) {
+         return res.status(404).send({msg:'no comment!!'});
+      }
+
+      if(comment.userId.toString() !== userId) {
+         return res.status(403).send({msg:'Unauthorized'});
+      }
+
+      comment.content = content;
+      await comment.save();
+      res.status(200).send(comment);
+
+   } catch (error) {
+      console.error(error);
+      res.status(500).send({status: ' Error', msg: 'Faild to update!'})
+   }
+};
+
+const DeleteComment = async (req, res) => {
+   try {
+      const userId = res.locals.payload.id;
+      const {commentId} = req.params;
+
+      const comment = await Comment.findById(commentId);
+
+      if (!comment) return res.status(404).send({msg:'no comment!'});
+
+      if(comment.userId.toString() !== userId) {
+         return res.status(403).send({msg:'Unauthorized'})
+      }
+
+      await comment.deleteOne();
+      res.status(200).send({msg: 'Commen Deleted'})
+   } catch (error) {
+      console.error(error);
+      res.status(500).send({status: 'Error' , msg : `Can't delete the comment`});
+      
+   }
+};
+
 
 module.exports = {
    CreateComment,
-   GetPetComment
+   GetPetComment,
+   UpdateComment,
+   DeleteComment
 };
