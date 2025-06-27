@@ -48,7 +48,7 @@ const getAllPets = async (req, res) => {
       return res.status(404).send("pet not found");
     }
 
-    // Make sure shelter owns pet
+    // shelter owns pet
     if (pet.shelterId.toString() !== req.user.id) {
       return res.status(401).send("Not authorized to update this pet");
     }
@@ -74,7 +74,7 @@ const getAllPets = async (req, res) => {
       return res.status(404).send('Pet not found');
     }
 
-    // Make sure shelter owns pet
+    // shelter owns pet
     if (pet.shelterId.toString() !== req.user.id) {
       return res.status(403).send('Not authorized to delete this pet');
     }
