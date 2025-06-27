@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('../controllers/asdoptcontroller');
+const controller = require('../controllers/adoptController');
 const middleware = require('../middleware');
 
 router.post('/', 
