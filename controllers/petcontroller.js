@@ -1,5 +1,6 @@
 const Pet = require('../models/Pet.js');
 
+// all pet
 const getAllPets = async (req, res) => {
   try {
     const pets = await Pet.find({});
@@ -9,6 +10,7 @@ const getAllPets = async (req, res) => {
     res.status(500);
   }
 };
+
 
  const getPetById = async (req, res) => {
   try {
