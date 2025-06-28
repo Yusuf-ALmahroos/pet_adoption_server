@@ -61,8 +61,9 @@ const getAllPets = async (req, res) => {
       new: true,
       runValidators: true
     })
+    console.log('Pet updated:', pet);
 
-    res.send(pet);
+    return res.status(200).json(pet);
   } catch (error) {
     console.error('Update pet error:', error);
     res.status(500).send('Server error updating pet');

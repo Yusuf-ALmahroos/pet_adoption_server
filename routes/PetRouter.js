@@ -4,7 +4,12 @@ const middleware = require('../middleware')
 
 router.get('/', controller.getAllPets);
 
-router.get('/me', 
+router.get('/me',
+  middleware.stripToken, 
+  middleware.verifyToken, 
+  controller.getUserPets);
+
+router.get('/:id', 
   middleware.stripToken, 
   middleware.verifyToken,
   controller.getPetById);
@@ -26,9 +31,9 @@ router.delete('/:id',
   middleware.verifyToken,
   controller.deletePet)
 
-router.get('/me',
-  middleware.stripToken, 
-  middleware.verifyToken, 
-  controller.getUserPets);
+router.put('/:id', (req, res) => {
+  console.log("inside router ✅");
+  res.send("OK");
+});
 
 module.exports = router;
