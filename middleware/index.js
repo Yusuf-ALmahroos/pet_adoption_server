@@ -6,21 +6,25 @@ require('dotenv').config()
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
 const APP_SECRET = process.env.APP_SECRET;
 
+// hash passwoed
 const hashPassword = async (password) => {
     let hash = await bcrypt.hash(password, SALT_ROUNDS);
     return hash
 };
 
+// compare Password
 const comparePassword = async (password, storedPassword) => {
     let passwordPass = await bcrypt.compare(password, storedPassword);
     return passwordPass
 };
 
+// create Token
 const createToken = (payload) => {
     let token = jwt.sign(payload, APP_SECRET, {expiresIn: '7d'});
     return token
 };
 
+// strip Token
 const stripToken = (req, res, next) => {
     try {
        const authHeader = req.headers['authorization'];
@@ -38,6 +42,7 @@ const stripToken = (req, res, next) => {
     }
 };
 
+// verify Token
 const verifyToken = (req, res, next) => {
     const {token} = res.locals;
 
