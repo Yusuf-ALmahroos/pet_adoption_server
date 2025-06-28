@@ -23,12 +23,13 @@ const createToken = (payload) => {
 
 const stripToken = (req, res, next) => {
     try {
-        const token = req.headers['authorization'].split(' ')[1]
+       const authHeader = req.headers['authorization'];
 
-        if (token) {
-            res.locals.token = token
-            return next();
-        }
+       if (authHeader && authHeader.startsWith('Bearer ')){
+        const token = authHeader.split(' ')[1];
+        res.locals.token = token;
+        return next();
+       }
         res.status(401).send({ status: 'Error', msg: 'Unauthorized'});
     } catch (error) {
         console.log(error);
