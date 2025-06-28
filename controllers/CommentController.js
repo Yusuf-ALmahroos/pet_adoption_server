@@ -1,5 +1,6 @@
 const Comment = require('../models/Comment');
 
+// user Comment
 const CreateComment = async (req, res) => {
    try {
     const userId = res.locals.payload.id;
@@ -17,6 +18,7 @@ const CreateComment = async (req, res) => {
    }
 };
 
+// user pet Comment
 const GetPetComment = async (req, res) => {
    try {
       const {petId}= req.params;
@@ -33,6 +35,7 @@ const GetPetComment = async (req, res) => {
    }
 };
 
+// user Update Comment
 const UpdateComment =async (req,res) => {
    try {
       const userId = res.locals.payload;
@@ -59,6 +62,7 @@ const UpdateComment =async (req,res) => {
    }
 };
 
+// user Delete Comment
 const DeleteComment = async (req, res) => {
    try {
       const userId = res.locals.payload.id;

@@ -1,6 +1,7 @@
 const User = require ('../models/User');
 const middleware = require ('../middleware');
 
+// user Register
 const Register = async (req, res) => {
     try {
         const {name, email, password} = req.body;
@@ -21,6 +22,7 @@ const Register = async (req, res) => {
     }
 };
 
+// login user
 const Login = async (req, res) => {
     try {
         const { email, password} = req.body;
@@ -47,6 +49,7 @@ const Login = async (req, res) => {
     }
 };
 
+// update user password
 const UpdatePassword =async (req, res) => {
     try {
         const {oldPassword, newPassword} = req.body;
@@ -74,6 +77,7 @@ const UpdatePassword =async (req, res) => {
     }
 };
 
+// Session check
 const CheckSession = async (req,res) => {
     const { payload} = res.locals;
     res.status(200).send(payload);

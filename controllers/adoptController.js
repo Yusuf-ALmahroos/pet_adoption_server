@@ -1,6 +1,7 @@
 const AdoptionRequest = require('../models/AdoptionRequest.js');
 const Pet             = require('../models/Pet.js')
 
+
 const createAdoptionRequest = async (req, res) => {
   try {
     const { petId, message, adopterInfo } = req.body;
