@@ -6,7 +6,9 @@ const petSchema = new mongoose.Schema({
   breed: { type: String, required: true },
   age: { type: Number, required: true },
   description: { type: String },
-  shelterId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+  image: {type: String}, //URL
+  isAdopted: { type: Boolean, default: false},
+  ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
 const Pet = mongoose.model('Pet', petSchema); 

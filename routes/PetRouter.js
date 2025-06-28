@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const controller = require('../controllers/petController.js');
+const controller = require('../controllers/PetController');
 const middleware = require('../middleware')
 
-router.get('/all/', controller.getAllPets);
+router.get('/', controller.getAllPets);
 
-router.get('/:id', 
+router.get('/me', 
   middleware.stripToken, 
   middleware.verifyToken,
   controller.getPetById);
@@ -26,9 +26,9 @@ router.delete('/:id',
   middleware.verifyToken,
   controller.deletePet)
 
-router.get('/shelter/my-pets',
+router.get('/me',
   middleware.stripToken, 
   middleware.verifyToken, 
-  controller.getShelterPets);
+  controller.getUserPets);
 
 module.exports = router;

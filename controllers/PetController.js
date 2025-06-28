@@ -28,9 +28,11 @@ const getAllPets = async (req, res) => {
 
  const createPet = async (req, res) => {
   try {
+
+    const userId = res.locals.payload.id;  
     const petData = {
       ...req.body,
-      shelterId: req.user.id
+      ownerId : userId
     };
 
     const pet = await Pet.create(petData);
@@ -51,7 +53,7 @@ const getAllPets = async (req, res) => {
     }
 
     // shelter owns pet
-    if (pet.shelterId.toString() !== req.user.id) {
+    if (pet.ownerId.toString() !== res.locals.payload.id) {
       return res.status(401).send("Not authorized to update this pet");
     }
 
@@ -77,7 +79,7 @@ const getAllPets = async (req, res) => {
     }
 
     // shelter owns pet
-    if (pet.shelterId.toString() !== req.user.id) {
+    if (pet.ownerId.toString() !== res.locals.payload.id) {
       return res.status(403).send('Not authorized to delete this pet');
     }
 
@@ -91,12 +93,14 @@ const getAllPets = async (req, res) => {
 };
 
 
- const getShelterPets = async (req, res) => {
+ const getUserPets = async (req, res) => {
   try {
-    const pets = await Pet.find({ shelterId: req.user.id })
+    const userId = res.locals.payload.id;
+    const pets = await Pet.find({ ownerId: userId })
+    res.status(200).send(pets);
   } catch (error) {
-    console.error('Get shelter pets error:', error);
-    res.status(500)
+    console.error('Get user pets error:', error);
+    res.status(500).send('error fatching user pet')
   }
 };
 
@@ -107,5 +111,5 @@ module.exports = {
   createPet,
   updatePet,
   deletePet,
-  getShelterPets
+  getUserPets
 }
