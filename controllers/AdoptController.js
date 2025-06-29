@@ -1,38 +1,27 @@
 const AdoptionRequest = require('../models/AdoptionRequest.js');
-const Pet             = require('../models/Pet.js')
+const Pet = require('../models/Pet.js');
 
 
-const createAdoptionRequest = async (req, res) => {
+const createRequest = async (req, res) => {
   try {
-    const { petId, message, adopterInfo } = req.body;
+    const userId = res.locals.payload.id;
+    const { petId, message} = req.body;
 
-    const pet = await Pet.findById(petId).populate('shelterId');
-    if (!pet) {
-      return res.status(404).send('Pet not found');
+    const pet = await Pet.findById(petId);
+    if (!pet) return res.status(404).send('pet not found');
+
+    if (pet.ownerId.toString() === userId) {
+      return res.status(400).send("You can't adopt your pet !!!????")
     }
 
-    const existingRequest = await AdoptionRequest.findOne({
-      pet: petId,
-      adopter: req.user.id,
-      status: { $in: ['pending', 'approved'] }
-    });
+    const existing = await AdoptionRequest.findOne({petId, requesterId: userId});
+    if (existing) return res.status(400).send("You alredy requested!!");
 
-    if (existingRequest) {
-      return res.status(400).send('You already have a pending request for this pet');
-    }
-
-    const adoptionRequest = await AdoptionRequest.create({
-      pet: petId,
-      adopter: req.user.id,
-      shelter: pet.shelterId._id,
-      adopterInfo
-    });
-
-
-    res.status(201).send(adoptionRequest);
+    const request = await AdoptionRequest.create({petId, requesterId: userId, message});
+    res.status(201).json(request);
   } catch (error) {
-    console.error('Create adoption request error:', error);
-    res.status(500).send('Server error creating adoption request');
+    console.error(error);
+    res.status(500).send('Server error');
   }
 };
 
@@ -79,7 +68,7 @@ const getAdoptionRequest = async (req, res) => {
 };
 
 module.exports = {
-  createAdoptionRequest,
+  createRequest,
   getAdopterRequests,
   getShelterRequests,
   getAdoptionRequest
