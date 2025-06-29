@@ -1,25 +1,29 @@
 const router = require('express').Router();
-const controller = require('../controllers/adoptController');
+const controller = require('../controllers/AdoptController');
 const middleware = require('../middleware');
 
 router.post('/', 
     middleware.stripToken, 
     middleware.verifyToken,
-    controller.createAdoptionRequest);
+    controller.createRequest
+);
 
-router.get('/adopter',     
+router.get('/my',     
   middleware.stripToken, 
   middleware.verifyToken,
-  controller.getAdopterRequests);
+  controller.getMyRequests
+);
 
-router.get('/shelter',
+router.get('/received',
   middleware.stripToken, 
   middleware.verifyToken,
-  controller.getShelterRequests);
+  controller.getReceivedRequests
+);
 
-router.get('/:id', 
+router.get('/respond/:requestId', 
   middleware.stripToken, 
   middleware.verifyToken,
-  controller.getAdoptionRequest);
+  controller.resToRequest
+);
 
 module.exports = router;

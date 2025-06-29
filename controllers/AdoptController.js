@@ -25,51 +25,65 @@ const createRequest = async (req, res) => {
   }
 };
 
-const getAdopterRequests = async (req, res) => {
-  try {
-    const requests = await AdoptionRequest.find({ adopter: req.user.id })
+const getMyRequests = async (req, res) => {   
+ try {
+  const userId = res.locals.payload.id;
+  const requests = await AdoptionRequest.find({requesterId: userId}).populate('petId');
+  res.json(requests);
+ } catch (error) {
+  console.error(error);
+  res.status(500).send('Server Error');
+ }
+};
 
-    res.send(requests);
+const getReceivedRequests = async (req, res) => {
+  try {
+    const userId = res.locals.payload.id;
+    const pets = await Pet.find({ownerId: userId}).select('_id');
+    const petIds = pets.map(p => p._id);
+
+    const requests =await AdoptionRequest.find({petId: {$in: petIds}})
+    .populate('petId')
+    .populate('requesterId');
+
+    res.json(requests);
   } catch (error) {
-    console.error('Get adopter requests error:', error);
-    res.status(500).send('Server error fetching adoption requests');
+    console.error(error);
+    res.status(500).send('Server Error');
   }
 };
 
-const getShelterRequests = async (req, res) => {
-  try {
-    const requests = await AdoptionRequest.find({ shelter: req.user.id })
+const resToRequest = async (req, res) => {
+try {
+  const {requestId} = req.params;
+  const{status} = req.body; //approve or no
+  const userId = res.locals.payload.id;
 
-    res.send(requests);
-  } catch (error) {
-    console.error('Get shelter requests error:', error);
-    res.status(500).send('Server error fetching adoption requests');
+  const request = await AdoptionRequest.findById(requestId).populate('petId');
+  if(!request) return res.status(404).send('no Request found');
+
+  if (request.petId.ownerId.toString() !== userId) {
+    return res.status(403).send('Not Authorized');
   }
-};
 
-const getAdoptionRequest = async (req, res) => {
-  try {
-    const request = await AdoptionRequest.findById(req.params.id)
+  request.status = status;
+  await request.save();
 
-    if (!request) {
-      return res.status(404).send('Adoption request not found');
-    }
-
-    if (request.adopter._id.toString() !== req.user.id && 
-        request.shelter._id.toString() !== req.user.id) {
-      return res.status(403).send('Not authorized to view this request');
-    }
-
-    res.send(request);
-  } catch (error) {
-    console.error('Get adoption request error:', error);
-    res.status(500).send('Server error fetching adoption request');
+  if (status === 'approved') {
+    await Pet.findByIdAndUpdate(request.petId._id, { isAdopted: true});
   }
+
+  res.json(request);
+} catch (error) {
+  console.error(error);
+  res.status(500).send('Server error');
+}
+
 };
 
 module.exports = {
   createRequest,
-  getAdopterRequests,
-  getShelterRequests,
-  getAdoptionRequest
+  getMyRequests,
+  getReceivedRequests,
+  resToRequest
 }
