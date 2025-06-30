@@ -1,6 +1,7 @@
-const {User} = require ('../models');
-const middleware = require ('../middleware')
+const User = require ('../models/User');
+const middleware = require ('../middleware');
 
+// user Register
 const Register = async (req, res) => {
     try {
         const {name, email, password} = req.body;
@@ -21,10 +22,16 @@ const Register = async (req, res) => {
     }
 };
 
+// login user
 const Login = async (req, res) => {
     try {
         const { email, password} = req.body;
         const user = await User.findOne({email});
+
+        if (!user) {
+            return res.status(401).send({status: 'Error', msg: 'Invalid email or password'})
+        }
+        
         let matched = await middleware.comparePassword(
             password,
             user.passwordDigest
@@ -47,10 +54,11 @@ const Login = async (req, res) => {
     }
 };
 
+// update user password
 const UpdatePassword =async (req, res) => {
     try {
         const {oldPassword, newPassword} = req.body;
-        let user = await User.findOne(req.params.user_id);
+        let user = await User.findById(req.params.user_id);
         let matched = await middleware.comparePassword(
             oldPassword,
             user.passwordDigest
@@ -74,6 +82,7 @@ const UpdatePassword =async (req, res) => {
     }
 };
 
+// Session check
 const CheckSession = async (req,res) => {
     const { payload} = res.locals;
     res.status(200).send(payload);
