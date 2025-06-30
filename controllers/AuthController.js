@@ -27,6 +27,11 @@ const Login = async (req, res) => {
     try {
         const { email, password} = req.body;
         const user = await User.findOne({email});
+
+        if (!user) {
+            return res.status(401).send({status: 'Error', msg: 'Invalid email or password'})
+        }
+        
         let matched = await middleware.comparePassword(
             password,
             user.passwordDigest
