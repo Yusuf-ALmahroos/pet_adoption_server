@@ -4,10 +4,10 @@ const commentSchema = new mongoose.Schema (
     {
         userId:{type: mongoose.Schema.Types.ObjectId, ref:'User', required: true},
         petId: {type: mongoose.Schema.Types.ObjectId, ref: 'Pet', required: true},
-        congtent:{type:String, require: true}
+        content:{type:String, require: true}
     }
 );
 
 const Comment = mongoose.model('Comment', commentSchema);
 
-exports.model = Comment;
+module.exports = Comment;

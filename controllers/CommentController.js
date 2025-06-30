@@ -26,7 +26,6 @@ const GetPetComment = async (req, res) => {
       const comments = await Comment.find({petId})
       .populate('userId','name')
       .sort({createdAt: -1});
-
    res.status(200).send(comments);
    } catch (error) {
       console.error(error);
