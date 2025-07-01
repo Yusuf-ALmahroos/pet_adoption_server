@@ -1,6 +1,6 @@
-![#GA-Adoption-pet](https://files.slack.com/files-tmb/T03JBCX8WE7-F094D0G0SDN-ed728cb417/chatgpt_image_jun_23__2025__01_13_41_pm_720.png)
+![GA-Adoption-pet](https://files.slack.com/files-tmb/T03JBCX8WE7-F094D0G0SDN-ed728cb417/chatgpt_image_jun_23__2025__01_13_41_pm_720.png)
 
-![#ERD](https://files.slack.com/files-tmb/T03JBCX8WE7-F094GDND000-84e6aa6d2e/untitled_diagram.drawio__1__720.png)
+![ERD](https://files.slack.com/files-pri/T03JBCX8WE7-F094GDND000/untitled_diagram.drawio__1_.png)
 
 [Back End](#back-end)
 [github-pet_adoption_server](https://github.com/Yusuf-ALmahroos/pet_adoption_server)
@@ -93,7 +93,7 @@ This is a backend server for a pet adoption platform, built with Node.js, Expres
     ```bash
     node server.js
     ```
-    The server will typically run on `http://localhost:3001` (or the port configured in `server.js`).
+    The server will typically run on `http://localhost:3000` (or the port configured in `server.js`).
 
 ## API Endpoints
 
@@ -188,7 +188,7 @@ This is a React-based front-end application for a pet adoption platform. It allo
 The project follows a standard React application structure:
 
 ```
-.
+
     public/
          Pet Adaption Logo.png
      services/
