@@ -1,6 +1,6 @@
-![#GA-Adoption-pet](https://files.slack.com/files-tmb/T03JBCX8WE7-F094D0G0SDN-ed728cb417/chatgpt_image_jun_23__2025__01_13_41_pm_720.png)
+![GA-Adoption-pet](https://files.slack.com/files-tmb/T03JBCX8WE7-F094D0G0SDN-ed728cb417/chatgpt_image_jun_23__2025__01_13_41_pm_720.png)
 
-![#ERD](https://files.slack.com/files-tmb/T03JBCX8WE7-F094GDND000-84e6aa6d2e/untitled_diagram.drawio__1__720.png)
+![ERD](https://files.slack.com/files-tmb/T03JBCX8WE7-F094GDND000-84e6aa6d2e/untitled_diagram.drawio__1__720.png)
 
 [Back End](#back-end)
 [github-pet_adoption_server](https://github.com/Yusuf-ALmahroos/pet_adoption_server)
