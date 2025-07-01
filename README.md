@@ -1,7 +1,7 @@
 ![GA-Adoption-pet](./db/screenShots/logo.png)
 
 
-![ERD](./db/screenShots/logo.png)
+![ERD](./db/screenShots/ERD.png)
 
 [#Back End](#back-end)
 [github-pet_adoption_server](https://github.com/Yusuf-ALmahroos/pet_adoption_server)
@@ -107,32 +107,32 @@ Below is a summary of the main API endpoints. All authenticated routes require a
 
 ### Authentication (`/auth`)
 
-*   `POST /auth/register`: Register a new user.
-*   `POST /auth/login`: Log in a user and receive a JWT.
+*   `POST /auth/register`      : Register a new user.
+*   `POST /auth/login`         : Log in a user and receive a JWT.
 *   `PUT /auth/update/:user_id`: Update user password (authenticated).
-*   `GET /auth/session`: Check user session (authenticated).
+*   `GET /auth/session`        : Check user session (authenticated).
 
 ### Pets (`/pets`)
 
-*   `GET /pets`: Get all pets.
-*   `GET /pets/me`: Get pets owned by the authenticated user (shelter owner) (authenticated).
-*   `GET /pets/:id`: Get a pet by ID (authenticated).
-*   `POST /pets`: Create a new pet listing (authenticated).
-*   `PUT /pets/:id`: Update a pet listing (authenticated, owner only).
+*   `GET /pets`       : Get  all pets.
+*   `GET /pets/me`    : Get pets owned by the authenticated user (shelter owner) (authenticated).
+*   `GET /pets/:id`   : Get a pet by ID (authenticated).
+*   `POST /pets`      : Create a new pet listing (authenticated).
+*   `PUT /pets/:id`   : Update a pet listing (authenticated, owner only).
 *   `DELETE /pets/:id`: Delete a pet listing (authenticated, owner only).
 
 ### Adoption Requests (`/adoption-requests`)
 
-*   `POST /adoption-requests`: Create a new adoption request (authenticated).
-*   `GET /adoption-requests/my`: Get adoption requests made by the authenticated user (authenticated).
-*   `GET /adoption-requests/received`: Get adoption requests received for the authenticated user's pets (authenticated, owner only).
+*   `POST /adoption-requests`                  : Create a new adoption request (authenticated).
+*   `GET /adoption-requests/my`                : Get adoption requests made by the authenticated user (authenticated).
+*   `GET /adoption-requests/received`          : Get adoption requests received for the authenticated user's pets (authenticated, owner only).
 *   `GET /adoption-requests/respond/:requestId`: Respond to an adoption request (approve/reject) (authenticated, owner only).
 
 ### Comments (`/comments`)
 
-*   `POST /comments`: Create a new comment on a pet (authenticated).
-*   `GET /comments/pet/:petId`: Get all comments for a specific pet.
-*   `PUT /comments/:commentId`: Update a comment (authenticated, owner only).
+*   `POST /comments`             : Create a new comment on a pet (authenticated).
+*   `GET /comments/pet/:petId`   : Get all comments for a specific pet.
+*   `PUT /comments/:commentId`   : Update a comment (authenticated, owner only).
 *   `DELETE /comments/:commentId`: Delete a comment (authenticated, owner only).
 
 ## Usage Example (using `curl`)
@@ -173,20 +173,20 @@ This is a React-based front-end application for a pet adoption platform. It allo
 ## Features
 
 - **User Authentication:** Register, Login, and Update Password functionality.
-- **Pet Listing:** View a list of available pets, categorized by type (Dogs, Cats, Birds, Other Animals).
-- **Pet Details:** View detailed information about individual pets, including descriptions and images.
-- **Add/Edit Pets:** Authenticated users can add new pets to the platform and edit existing pet details.
-- **Adoption Requests:** Users can submit adoption requests for available pets.
-- **User Profile:** View adopted pets and manage user-specific information.
-- **Comments:** Users can leave comments on pet profiles.
+- **Pet Listing:**         View a list of available pets, categorized by type (Dogs, Cats, Birds, Other Animals).
+- **Pet Details:**         View detailed information about individual pets, including descriptions and images.
+- **Add/Edit Pets:**       Authenticated users can add new pets to the platform and edit existing pet details.
+- **Adoption Requests:**   Users can submit adoption requests for available pets.
+- **User Profile:**        View adopted pets and manage user-specific information.
+- **Comments:**            Users can leave comments on pet profiles.
 - **Responsive Navigation:** A navigation bar that adapts based on user login status.
 
 ## Technologies Used
 
-- **React:** A JavaScript library for building user interfaces.
-- **React Router DOM:** For declarative routing in React applications.
-- **Axios:** A promise-based HTTP client for making API requests.
-- **CSS:** For styling the application.
+- **React:**                A JavaScript library for building user interfaces.
+- **React Router DOM:**     For declarative routing in React applications.
+- **Axios:**                A promise-based HTTP client for making API requests.
+- **CSS:**                  For styling the application.
 
 ## Project Structure
 
