@@ -29,11 +29,6 @@ router.put('/:id',
 router.delete('/:id', 
   middleware.stripToken, 
   middleware.verifyToken,
-  controller.deletePet)
-
-router.put('/:id', (req, res) => {
-  console.log("inside router ✅");
-  res.send("OK");
-});
+  controller.deletePet);
 
 module.exports = router;
