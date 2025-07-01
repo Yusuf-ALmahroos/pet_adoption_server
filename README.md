@@ -8,7 +8,9 @@
 [#FRONT END](#front-end)
 [github-pet_adoption_client](https://github.com/Yusuf-ALmahroos/pet_adoption_client)
 
-#back-end
+#back-end🔧
+- [🎨 Front End](#front-end)
+
 # Pet Adoption Server
 
 This is a backend server for a pet adoption platform, built with Node.js, Express, and MongoDB (Mongoose). It provides a RESTful API for managing users, pets, adoption requests, and comments.
@@ -47,32 +49,30 @@ This is a backend server for a pet adoption platform, built with Node.js, Expres
 ## Project Structure
 
 ```
-
-     controllers/          # Contains the business logic for API endpoints
-         AdoptController.js
-         AuthController.js
-         CommentController.js
-         PetController.js
-     db/                   # Database connection setup
-         index.js
-     middleware/           # Authentication middleware
-         index.js
-     models/               # Mongoose schemas for data models
-        AdoptionRequest.js
-         Comment.js
-         Pet.js
-         User.js
-     routes/               # Defines API routes and links to controllers
-         AdoptionRequestRouter.js
-         AuthRouter.js
-         CommentRouter.js
-         PetRouter.js
-     .env.example          # Example environment variables file
-     package.json          # Project dependencies and scripts
-     README.md             # This file
-     server.js             # Main server entry point
+     controllers/           Contains the business logic for API endpoints
+         AdoptController.js     Handles adoption request related operations.
+         AuthController.js      Manages user authentication (registration, login, password updates).
+         CommentController.js   Manages comments on pet listings.
+         PetController.js       Handles pet listing operations (create, read, update, delete).
+     db/                    Database connection setup
+         index.js               Establishes connection to MongoDB.
+     middleware/            Authentication middleware
+         index.js               Contains middleware for JWT verification and other authentication checks.
+     models/                Mongoose schemas for data models
+        AdoptionRequest.js      Defines the schema for adoption requests.
+         Comment.js             Defines the schema for comments.
+         Pet.js                 Defines the schema for pet listings.
+         User.js                Defines the schema for user accounts.
+     routes/                Defines API routes and links to controllers
+         AdoptionRequestRouter.js  Routes for adoption request endpoints.
+         AuthRouter.js          Routes for authentication endpoints.
+         CommentRouter.js       Routes for comment endpoints.
+         PetRouter.js           Routes for pet listing endpoints.
+     .env.example           Example environment variables file
+     package.json           Project dependencies and scripts
+     README.md              This file
+     server.js              Main server entry point, sets up Express app and routes.
 ```
-
 ## Setup and Installation
 
 1.  **Clone the repository**:
@@ -159,10 +159,11 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"petId": "60c72b2f9b1e8c001c8e4d7a", "message": "I would love to adopt Buddy!"}' http://localhost:3000/adoption-requests
+```
 
 
-
-#front-end
+#front-end🎨
+- [🔧 Back End](#back-end)
 
 # GA Pet Adoption Client
 
@@ -191,34 +192,33 @@ This is a React-based front-end application for a pet adoption platform. It allo
 The project follows a standard React application structure:
 
 ```
-
-    public/
-         Pet Adaption Logo.png
-     services/
-         api.js
-    src/
-        App.css
-         App.jsx
-         main.jsx
-         components/
-         AddPetForm.jsx
-         AdoptionRequestForm.jsx
-         CommentSection.jsx
-         EditPetForm.jsx
-         LoginForm.jsx
-         Nav.jsx
-         PetCard.jsx
-         RegisterForm.jsx
-         UpdatePasswordForm.jsx
-      pages/
-         AddPet.jsx
-         EditPet.jsx
-         Home.jsx
-         Login.jsx
-         Pet.jsx
-         Register.jsx
-         UserProfile.jsx
-      styles/
+    public/                 Static assets like images.
+         Pet Adaption Logo.png  Application logo.
+     services/              API service configurations.
+         api.js             Configures the Axios instance for making API requests to the backend.
+    src/                    Main application source code.
+        App.css             Global CSS styles for the application.
+         App.jsx            The main application component, handling routing and user state.
+         main.jsx           Entry point for the React application, renders the App component.
+         components/        Contains reusable UI components.
+         AddPetForm.jsx         Form for adding new pet listings.
+         AdoptionRequestForm.jsx  Form for submitting adoption requests.
+         CommentSection.jsx     Component for displaying and adding comments on pet profiles.
+         EditPetForm.jsx        Form for editing existing pet details.
+         LoginForm.jsx          Form for user login.
+         Nav.jsx                Navigation bar component, adapts based on user login status.
+         PetCard.jsx            Component to display individual pet information in a card format.
+         RegisterForm.jsx       Form for new user registration.
+         UpdatePasswordForm.jsx  Form for updating user passwords.
+      pages/                Contains components representing different views or pages of the application.
+         AddPet.jsx             Page for adding a new pet.
+         EditPet.jsx            Page for editing a pet.
+         Home.jsx               Home page displaying available pets.
+         Login.jsx              Login page.
+         Pet.jsx                Detailed view page for a single pet.
+         Register.jsx           Registration page.
+         UserProfile.jsx        User profile page to view adopted pets and manage information.
+      styles/               Contains CSS files for styling various components and pages.
          AddPetForm.css
          AdoptionRequestForm.css
          EditPetForm.css
@@ -229,19 +229,12 @@ The project follows a standard React application structure:
          petCard.css
          RegisterForm.css
          UpdatePasswordForm.css
-     .gitignore
-     index.html
-     package.json
-     README.md
-     vite.config.js
+     .gitignore             Specifies intentionally untracked files to ignore.
+     index.html             The main HTML file served by the development server.
+     package.json           Project dependencies and scripts.
+     README.md              This file.
+     vite.config.js         Configuration file for Vite, the build tool.
 ```
-
-- `src/App.jsx`: The main application component, handling routing and user state.
-- `src/main.jsx`: Entry point for the React application.
-- `src/components/`: Contains reusable UI components (e.g., forms, navigation, cards).
-- `src/pages/`: Contains components representing different views or pages of the application.
-- `src/styles/`: Contains CSS files for styling various components and pages.
-- `services/api.js`: Configures the Axios instance for API calls.
 
 ## Setup and Installation
 
