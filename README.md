@@ -1,11 +1,17 @@
-![GA-Adoption-pet](https://files.slack.com/files-tmb/T03JBCX8WE7-F094D0G0SDN-ed728cb417/chatgpt_image_jun_23__2025__01_13_41_pm_720.png)
+![GA-Adoption-pet](./db/screenShots/logo.png)
 
 
-![ERD](https://files.slack.com/files-pri/T03JBCX8WE7-F094GDND000/untitled_diagram.drawio__1_.png)
+![ERD](./db/screenShots/ERD.png)
 
-
-[Back End](#back-end)
+[#Back End](#back-end)
 [github-pet_adoption_server](https://github.com/Yusuf-ALmahroos/pet_adoption_server)
+
+[#FRONT END](#front-end)
+[github-pet_adoption_client](https://github.com/Yusuf-ALmahroos/pet_adoption_client)
+
+#back-end🔧
+- [🎨 Front End](#front-end)
+
 # Pet Adoption Server
 
 This is a backend server for a pet adoption platform, built with Node.js, Express, and MongoDB (Mongoose). It provides a RESTful API for managing users, pets, adoption requests, and comments.
@@ -44,37 +50,35 @@ This is a backend server for a pet adoption platform, built with Node.js, Expres
 ## Project Structure
 
 ```
-.
-     controllers/          # Contains the business logic for API endpoints
-         AdoptController.js
-         AuthController.js
-         CommentController.js
-         PetController.js
-     db/                   # Database connection setup
-         index.js
-     middleware/           # Authentication middleware
-         index.js
-     models/               # Mongoose schemas for data models
-        AdoptionRequest.js
-         Comment.js
-         Pet.js
-         User.js
-     routes/               # Defines API routes and links to controllers
-         AdoptionRequestRouter.js
-         AuthRouter.js
-         CommentRouter.js
-         PetRouter.js
-     .env.example          # Example environment variables file
-     package.json          # Project dependencies and scripts
-     README.md             # This file
-     server.js             # Main server entry point
+     controllers/           Contains the business logic for API endpoints
+         AdoptController.js     Handles adoption request related operations.
+         AuthController.js      Manages user authentication (registration, login, password updates).
+         CommentController.js   Manages comments on pet listings.
+         PetController.js       Handles pet listing operations (create, read, update, delete).
+     db/                    Database connection setup
+         index.js               Establishes connection to MongoDB.
+     middleware/            Authentication middleware
+         index.js               Contains middleware for JWT verification and other authentication checks.
+     models/                Mongoose schemas for data models
+        AdoptionRequest.js      Defines the schema for adoption requests.
+         Comment.js             Defines the schema for comments.
+         Pet.js                 Defines the schema for pet listings.
+         User.js                Defines the schema for user accounts.
+     routes/                Defines API routes and links to controllers
+         AdoptionRequestRouter.js  Routes for adoption request endpoints.
+         AuthRouter.js          Routes for authentication endpoints.
+         CommentRouter.js       Routes for comment endpoints.
+         PetRouter.js           Routes for pet listing endpoints.
+     .env.example           Example environment variables file
+     package.json           Project dependencies and scripts
+     README.md              This file
+     server.js              Main server entry point, sets up Express app and routes.
 ```
-
 ## Setup and Installation
 
 1.  **Clone the repository**:
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/Yusuf-ALmahroos/pet_adoption_server.git
     cd pet_adoption_server
     ```
 2.  **Install dependencies**:
@@ -103,32 +107,32 @@ Below is a summary of the main API endpoints. All authenticated routes require a
 
 ### Authentication (`/auth`)
 
-*   `POST /auth/register`: Register a new user.
-*   `POST /auth/login`: Log in a user and receive a JWT.
+*   `POST /auth/register`      : Register a new user.
+*   `POST /auth/login`         : Log in a user and receive a JWT.
 *   `PUT /auth/update/:user_id`: Update user password (authenticated).
-*   `GET /auth/session`: Check user session (authenticated).
+*   `GET /auth/session`        : Check user session (authenticated).
 
 ### Pets (`/pets`)
 
-*   `GET /pets`: Get all pets.
-*   `GET /pets/me`: Get pets owned by the authenticated user (shelter owner) (authenticated).
-*   `GET /pets/:id`: Get a pet by ID (authenticated).
-*   `POST /pets`: Create a new pet listing (authenticated).
-*   `PUT /pets/:id`: Update a pet listing (authenticated, owner only).
+*   `GET /pets`       : Get  all pets.
+*   `GET /pets/me`    : Get pets owned by the authenticated user (shelter owner) (authenticated).
+*   `GET /pets/:id`   : Get a pet by ID (authenticated).
+*   `POST /pets`      : Create a new pet listing (authenticated).
+*   `PUT /pets/:id`   : Update a pet listing (authenticated, owner only).
 *   `DELETE /pets/:id`: Delete a pet listing (authenticated, owner only).
 
 ### Adoption Requests (`/adoption-requests`)
 
-*   `POST /adoption-requests`: Create a new adoption request (authenticated).
-*   `GET /adoption-requests/my`: Get adoption requests made by the authenticated user (authenticated).
-*   `GET /adoption-requests/received`: Get adoption requests received for the authenticated user's pets (authenticated, owner only).
+*   `POST /adoption-requests`                  : Create a new adoption request (authenticated).
+*   `GET /adoption-requests/my`                : Get adoption requests made by the authenticated user (authenticated).
+*   `GET /adoption-requests/received`          : Get adoption requests received for the authenticated user's pets (authenticated, owner only).
 *   `GET /adoption-requests/respond/:requestId`: Respond to an adoption request (approve/reject) (authenticated, owner only).
 
 ### Comments (`/comments`)
 
-*   `POST /comments`: Create a new comment on a pet (authenticated).
-*   `GET /comments/pet/:petId`: Get all comments for a specific pet.
-*   `PUT /comments/:commentId`: Update a comment (authenticated, owner only).
+*   `POST /comments`             : Create a new comment on a pet (authenticated).
+*   `GET /comments/pet/:petId`   : Get all comments for a specific pet.
+*   `PUT /comments/:commentId`   : Update a comment (authenticated, owner only).
 *   `DELETE /comments/:commentId`: Delete a comment (authenticated, owner only).
 
 ## Usage Example (using `curl`)
@@ -142,26 +146,25 @@ curl -X POST -H "Content-Type: application/json" -d '{"name": "John Doe", "email
 ### Login a User
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"email": "john@example.com", "password": "password123"}' http://localhost:3001/auth/login
+curl -X POST -H "Content-Type: application/json" -d '{"email": "john@example.com", "password": "password123"}' http://localhost:3000/auth/login
 ```
 (This will return a JWT token that you can use for authenticated requests)
 
 ### Create a Pet (as a shelter owner)
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"name": "Buddy", "type": "Dog", "breed": "Golden Retriever", "age": 2, "description": "Friendly and playful.", "image": "http://example.com/buddy.jpg"}' http://localhost:3001/pets
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"name": "Buddy", "type": "Dog", "breed": "Golden Retriever", "age": 2, "description": "Friendly and playful.", "image": "http://example.com/buddy.jpg"}' http://localhost:3000/pets
 ```
 
 ### Create an Adoption Request
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"petId": "60c72b2f9b1e8c001c8e4d7a", "message": "I would love to adopt Buddy!"}' http://localhost:3001/adoption-requests
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"petId": "60c72b2f9b1e8c001c8e4d7a", "message": "I would love to adopt Buddy!"}' http://localhost:3000/adoption-requests
+```
 
 
-
-[FRONT END](#front-end)
-
-[github-pet_adoption_client](https://github.com/Yusuf-ALmahroos/pet_adoption_client)
+#front-end🎨
+- [🔧 Back End](#back-end)
 
 # GA Pet Adoption Client
 
@@ -170,54 +173,53 @@ This is a React-based front-end application for a pet adoption platform. It allo
 ## Features
 
 - **User Authentication:** Register, Login, and Update Password functionality.
-- **Pet Listing:** View a list of available pets, categorized by type (Dogs, Cats, Birds, Other Animals).
-- **Pet Details:** View detailed information about individual pets, including descriptions and images.
-- **Add/Edit Pets:** Authenticated users can add new pets to the platform and edit existing pet details.
-- **Adoption Requests:** Users can submit adoption requests for available pets.
-- **User Profile:** View adopted pets and manage user-specific information.
-- **Comments:** Users can leave comments on pet profiles.
+- **Pet Listing:**         View a list of available pets, categorized by type (Dogs, Cats, Birds, Other Animals).
+- **Pet Details:**         View detailed information about individual pets, including descriptions and images.
+- **Add/Edit Pets:**       Authenticated users can add new pets to the platform and edit existing pet details.
+- **Adoption Requests:**   Users can submit adoption requests for available pets.
+- **User Profile:**        View adopted pets and manage user-specific information.
+- **Comments:**            Users can leave comments on pet profiles.
 - **Responsive Navigation:** A navigation bar that adapts based on user login status.
 
 ## Technologies Used
 
-- **React:** A JavaScript library for building user interfaces.
-- **React Router DOM:** For declarative routing in React applications.
-- **Axios:** A promise-based HTTP client for making API requests.
-- **CSS:** For styling the application.
+- **React:**                A JavaScript library for building user interfaces.
+- **React Router DOM:**     For declarative routing in React applications.
+- **Axios:**                A promise-based HTTP client for making API requests.
+- **CSS:**                  For styling the application.
 
 ## Project Structure
 
 The project follows a standard React application structure:
 
 ```
-
-    public/
-         Pet Adaption Logo.png
-     services/
-         api.js
-    src/
-        App.css
-         App.jsx
-         main.jsx
-         components/
-         AddPetForm.jsx
-         AdoptionRequestForm.jsx
-         CommentSection.jsx
-         EditPetForm.jsx
-         LoginForm.jsx
-         Nav.jsx
-         PetCard.jsx
-         RegisterForm.jsx
-         UpdatePasswordForm.jsx
-      pages/
-         AddPet.jsx
-         EditPet.jsx
-         Home.jsx
-         Login.jsx
-         Pet.jsx
-         Register.jsx
-         UserProfile.jsx
-      styles/
+    public/                 Static assets like images.
+         Pet Adaption Logo.png  Application logo.
+     services/              API service configurations.
+         api.js             Configures the Axios instance for making API requests to the backend.
+    src/                    Main application source code.
+        App.css             Global CSS styles for the application.
+         App.jsx            The main application component, handling routing and user state.
+         main.jsx           Entry point for the React application, renders the App component.
+         components/        Contains reusable UI components.
+         AddPetForm.jsx         Form for adding new pet listings.
+         AdoptionRequestForm.jsx  Form for submitting adoption requests.
+         CommentSection.jsx     Component for displaying and adding comments on pet profiles.
+         EditPetForm.jsx        Form for editing existing pet details.
+         LoginForm.jsx          Form for user login.
+         Nav.jsx                Navigation bar component, adapts based on user login status.
+         PetCard.jsx            Component to display individual pet information in a card format.
+         RegisterForm.jsx       Form for new user registration.
+         UpdatePasswordForm.jsx  Form for updating user passwords.
+      pages/                Contains components representing different views or pages of the application.
+         AddPet.jsx             Page for adding a new pet.
+         EditPet.jsx            Page for editing a pet.
+         Home.jsx               Home page displaying available pets.
+         Login.jsx              Login page.
+         Pet.jsx                Detailed view page for a single pet.
+         Register.jsx           Registration page.
+         UserProfile.jsx        User profile page to view adopted pets and manage information.
+      styles/               Contains CSS files for styling various components and pages.
          AddPetForm.css
          AdoptionRequestForm.css
          EditPetForm.css
@@ -228,25 +230,18 @@ The project follows a standard React application structure:
          petCard.css
          RegisterForm.css
          UpdatePasswordForm.css
-     .gitignore
-     index.html
-     package.json
-     README.md
-     vite.config.js
+     .gitignore             Specifies intentionally untracked files to ignore.
+     index.html             The main HTML file served by the development server.
+     package.json           Project dependencies and scripts.
+     README.md              This file.
+     vite.config.js         Configuration file for Vite, the build tool.
 ```
-
-- `src/App.jsx`: The main application component, handling routing and user state.
-- `src/main.jsx`: Entry point for the React application.
-- `src/components/`: Contains reusable UI components (e.g., forms, navigation, cards).
-- `src/pages/`: Contains components representing different views or pages of the application.
-- `src/styles/`: Contains CSS files for styling various components and pages.
-- `services/api.js`: Configures the Axios instance for API calls.
 
 ## Setup and Installation
 
 1.  **Clone the repository:**
     ```bash
-    git clone [repository-url]
+    git clone https://github.com/Yusuf-ALmahroos/pet_adoption_client.git
     cd pet_adoption_client
     ```
 
