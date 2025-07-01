@@ -1,9 +1,14 @@
-![GA-Adoption-pet](https://files.slack.com/files-tmb/T03JBCX8WE7-F094D0G0SDN-ed728cb417/chatgpt_image_jun_23__2025__01_13_41_pm_720.png)
+![GA-Adoption-pet](./db/screenShots/logo.png)
 
-![ERD](https://files.slack.com/files-pri/T03JBCX8WE7-F094GDND000/untitled_diagram.drawio__1_.png)
+![ERD](./db/screenShots/logo.png)
 
-[Back End](#back-end)
+[#Back End](#back-end)
 [github-pet_adoption_server](https://github.com/Yusuf-ALmahroos/pet_adoption_server)
+
+[#FRONT END](#front-end)
+[github-pet_adoption_client](https://github.com/Yusuf-ALmahroos/pet_adoption_client)
+
+#back-end
 # Pet Adoption Server
 
 This is a backend server for a pet adoption platform, built with Node.js, Express, and MongoDB (Mongoose). It provides a RESTful API for managing users, pets, adoption requests, and comments.
@@ -42,7 +47,7 @@ This is a backend server for a pet adoption platform, built with Node.js, Expres
 ## Project Structure
 
 ```
-.
+
      controllers/          # Contains the business logic for API endpoints
          AdoptController.js
          AuthController.js
@@ -72,7 +77,7 @@ This is a backend server for a pet adoption platform, built with Node.js, Expres
 
 1.  **Clone the repository**:
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/Yusuf-ALmahroos/pet_adoption_server.git
     cd pet_adoption_server
     ```
 2.  **Install dependencies**:
@@ -140,26 +145,24 @@ curl -X POST -H "Content-Type: application/json" -d '{"name": "John Doe", "email
 ### Login a User
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"email": "john@example.com", "password": "password123"}' http://localhost:3001/auth/login
+curl -X POST -H "Content-Type: application/json" -d '{"email": "john@example.com", "password": "password123"}' http://localhost:3000/auth/login
 ```
 (This will return a JWT token that you can use for authenticated requests)
 
 ### Create a Pet (as a shelter owner)
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"name": "Buddy", "type": "Dog", "breed": "Golden Retriever", "age": 2, "description": "Friendly and playful.", "image": "http://example.com/buddy.jpg"}' http://localhost:3001/pets
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"name": "Buddy", "type": "Dog", "breed": "Golden Retriever", "age": 2, "description": "Friendly and playful.", "image": "http://example.com/buddy.jpg"}' http://localhost:3000/pets
 ```
 
 ### Create an Adoption Request
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"petId": "60c72b2f9b1e8c001c8e4d7a", "message": "I would love to adopt Buddy!"}' http://localhost:3001/adoption-requests
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"petId": "60c72b2f9b1e8c001c8e4d7a", "message": "I would love to adopt Buddy!"}' http://localhost:3000/adoption-requests
 
 
 
-[FRONT END](#front-end)
-
-[github-pet_adoption_client](https://github.com/Yusuf-ALmahroos/pet_adoption_client)
+#front-end
 
 # GA Pet Adoption Client
 
@@ -244,7 +247,7 @@ The project follows a standard React application structure:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [repository-url]
+    git clone https://github.com/Yusuf-ALmahroos/pet_adoption_client.git
     cd pet_adoption_client
     ```
 
