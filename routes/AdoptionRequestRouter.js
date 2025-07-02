@@ -3,9 +3,9 @@ const controller = require('../controllers/AdoptController');
 const middleware = require('../middleware');
 
 router.post('/', 
-    middleware.stripToken, 
-    middleware.verifyToken,
-    controller.createRequest
+  middleware.stripToken, 
+  middleware.verifyToken,
+  controller.createRequest
 );
 
 router.get('/my',     
@@ -20,7 +20,7 @@ router.get('/received',
   controller.getReceivedRequests
 );
 
-router.get('/respond/:requestId', 
+router.post('/respond/:requestId', 
   middleware.stripToken, 
   middleware.verifyToken,
   controller.resToRequest

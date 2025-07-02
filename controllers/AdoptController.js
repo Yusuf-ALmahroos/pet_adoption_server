@@ -1,5 +1,6 @@
 const AdoptionRequest = require('../models/AdoptionRequest.js');
 const Pet = require('../models/Pet.js');
+const User = require('../models/User.js');
 
 
 const createRequest = async (req, res) => {
@@ -56,7 +57,7 @@ const getReceivedRequests = async (req, res) => {
 const resToRequest = async (req, res) => {
 try {
   const {requestId} = req.params;
-  const{status} = req.body; //approve or no
+  const {status} = req.body; //approve or no
   const userId = res.locals.payload.id;
 
   const request = await AdoptionRequest.findById(requestId).populate('petId');
@@ -70,10 +71,23 @@ try {
   await request.save();
 
   if (status === 'approved') {
-    await Pet.findByIdAndUpdate(request.petId._id, { isAdopted: true});
+    const newPet = await Pet.findByIdAndUpdate(request.petId._id, { isAdopted: true, ownerId: userId});
+    const newUser = await User.findById(request.requesterId);
+    const oldUser = await User.findById(userId);
+    newUser.pets.push(newPet._id);
+    const index = oldUser.pets.indexOf(newPet._id);
+    oldUser.pets.splice(index, 1);
+    newPet.ownerId = newUser._id;
+    await oldUser.save();
+    await newUser.save();
+    await newPet.save();
+    await AdoptionRequest.findByIdAndDelete(requestId)
+  }
+  else if (status === 'rejected') {
+    await AdoptionRequest.findByIdAndDelete(requestId)
   }
 
-  res.json(request);
+  res.send(request);
 } catch (error) {
   console.error(error);
   res.status(500).send('Server error');
