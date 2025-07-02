@@ -86,11 +86,6 @@ const DeleteComment = async (req, res) => {
       return res.status(404).json({ message: 'Comment not found.' });
     }
 
-    // Check if the authenticated user is the owner of the comment
-    if (comment.userId.toString() !== userId) {
-      return res.status(403).json({ message: 'Not authorized to delete this comment.' });
-    }
-
     await comment.deleteOne();
     res.status(200).json({ message: 'Comment deleted successfully.' });
   } catch (error) {
