@@ -71,7 +71,16 @@ try {
   await request.save();
 
   if (status === 'approved') {
-    await Pet.findByIdAndUpdate(request.petId._id, { isAdopted: true, ownerId: userId});
+    const newPet = await Pet.findByIdAndUpdate(request.petId._id, { isAdopted: true, ownerId: userId});
+    const newUser = await User.findById(request.requesterId);
+    const oldUser = await User.findById(userId);
+    newUser.pets.push(newPet._id);
+    const index = oldUser.pets.indexOf(newPet._id);
+    oldUser.pets.splice(index, 1);
+    newPet.ownerId = newUser._id;
+    await oldUser.save();
+    await newUser.save();
+    await newPet.save();
     await AdoptionRequest.findByIdAndDelete(requestId)
   }
   else if (status === 'rejected') {
