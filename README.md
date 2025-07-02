@@ -26,7 +26,7 @@ This is a backend server for a pet adoption platform, built with Node.js, Expres
 *   **Pet Management**:
     *   Create, read, update, and delete pet listings.
     *   View all available pets.
-    *   View pets owned by a specific user (shelter owner).
+    *   View pets owned by a specific user.
 *   **Adoption Requests**:
     *   Users can create adoption requests for pets.
     *   View personal adoption requests.
@@ -39,13 +39,13 @@ This is a backend server for a pet adoption platform, built with Node.js, Expres
 
 ## Technologies Used
 
-*   **Node.js**: JavaScript runtime environment.
-*   **Express.js**: Web application framework for Node.js.
-*   **MongoDB**: NoSQL database.
-*   **Mongoose**: ODM (Object Data Modeling) library for MongoDB and Node.js.
-*   **Bcrypt**: For password hashing.
-*   **jsonwebtoken**: For JWT (JSON Web Token) based authentication.
-*   **Dotenv**: To load environment variables from a `.env` file.
+*   **Node.js**     : JavaScript runtime environment.
+*   **Express.js**  : Web application framework for Node.js.
+*   **MongoDB**     : NoSQL database.
+*   **Mongoose**    : ODM (Object Data Modeling) library for MongoDB and Node.js.
+*   **Bcrypt**      : For password hashing.
+*   **jsonwebtoken**: For JWT(JSON Web Token) based authentication.
+*   **Dotenv**      : To load environment variables from a `.env` file.
 
 ## Project Structure
 
