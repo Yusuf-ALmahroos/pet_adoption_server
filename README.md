@@ -135,33 +135,6 @@ Below is a summary of the main API endpoints. All authenticated routes require a
 *   `PUT /comments/:commentId`   : Update a comment (authenticated, owner only).
 *   `DELETE /comments/:commentId`: Delete a comment (authenticated, owner only).
 
-## Usage Example (using `curl`)
-
-### Register a User
-
-```bash
-curl -X POST -H "Content-Type: application/json" -d '{"name": "John Doe", "email": "john@example.com", "password": "password123"}' http://localhost:3001/auth/register
-```
-
-### Login a User
-
-```bash
-curl -X POST -H "Content-Type: application/json" -d '{"email": "john@example.com", "password": "password123"}' http://localhost:3000/auth/login
-```
-(This will return a JWT token that you can use for authenticated requests)
-
-### Create a Pet (as a shelter owner)
-
-```bash
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"name": "Buddy", "type": "Dog", "breed": "Golden Retriever", "age": 2, "description": "Friendly and playful.", "image": "http://example.com/buddy.jpg"}' http://localhost:3000/pets
-```
-
-### Create an Adoption Request
-
-```bash
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <YOUR_JWT_TOKEN>" -d '{"petId": "60c72b2f9b1e8c001c8e4d7a", "message": "I would love to adopt Buddy!"}' http://localhost:3000/adoption-requests
-```
-
 
 #front-end🎨
 - [🔧 Back End](#back-end)
