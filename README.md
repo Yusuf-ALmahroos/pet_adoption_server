@@ -12,6 +12,9 @@
 #back-end🔧
 - [🎨 Front End](#front-end)
 
+# Deployed link:
+[pet_adoption](https://pet-ga-adoption.surge.sh/)
+
 # Pet Adoption Server
 
 A full-stack web application built with the MERN stack (MongoDB, Express.js, React.js, Node.js) for a pet adoption platform. It enables users to securely register, authenticate, and explore pets available for adoption. The app features a responsive, mobile-first design with smooth animations to enhance user engagement. Users can browse adoptable pets, submit and manage adoption requests, add or edit pet listings, and update their user profiles. JWT-based authentication protects user-specific features, while MongoDB efficiently manages all CRUD operations for users, pets, and adoption requests—ensuring scalable, real-time performance across devices.
