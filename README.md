@@ -14,9 +14,9 @@
 
 # Pet Adoption Server
 
-This is a backend server for a pet adoption platform, built with Node.js, Express, and MongoDB (Mongoose). It provides a RESTful API for managing users, pets, adoption requests, and comments.
+A full-stack web application built with the MERN stack (MongoDB, Express.js, React.js, Node.js) for a pet adoption platform. It enables users to securely register, authenticate, and explore pets available for adoption. The app features a responsive, mobile-first design with smooth animations to enhance user engagement. Users can browse adoptable pets, submit and manage adoption requests, add or edit pet listings, and update their user profiles. JWT-based authentication protects user-specific features, while MongoDB efficiently manages all CRUD operations for users, pets, and adoption requests—ensuring scalable, real-time performance across devices.
 
-## Features
+## Table of Contents:
 
 *   **User Management**:
     *   User registration and login.
@@ -36,6 +36,25 @@ This is a backend server for a pet adoption platform, built with Node.js, Expres
     *   Users can create comments on pet listings.
     *   View comments for a specific pet.
     *   Update and delete personal comments.
+
+## User Stories
+
+As a **user**, I want to:
+*   **Register and Log In** to the application securely.
+*   **View all available pets** on the home page.
+*   **View detailed information** about a specific pet.
+*   **Submit an adoption request** for a pet I'm interested in.
+*   **View my submitted adoption requests** and their statuses.
+*   **Update my password** to maintain account security.
+*   **Leave comments** on pet profiles.
+*   **Update or delete my own comments**.
+
+As a **shelter owner** (authenticated user), I want to:
+*   **Add new pet listings** to the platform.
+*   **Edit details of my existing pet listings**.
+*   **Delete my pet listings**.
+*   **View adoption requests received** for my pets.
+*   **Approve or reject adoption requests** for my pets.
 
 ## Technologies Used
 
